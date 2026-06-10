@@ -1,0 +1,44 @@
+{
+  "doc_type": "Test Report",
+  "model_series": "CE-1P3001G-230-EU, CE-1P5001G-230-EU, CE-1P6001G-230-EU, CE-1P8001G-230-EU, CE-1P10001G-230-EU, CE-1P13001G-230-EU, CE-1P16001G-230-EU, CE-1P18001G-230-EU, CE-1P20001G-230-EU",
+  "phase": "single",
+  "voltage_class": "60V",
+  "facts": [
+    {
+      "field_name": "standards",
+      "value": "IEC/EN 62109-1:2010",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Standard..........................................: EN 62109-1:2010\n    IEC 62109-1:2010 (First Edition)"
+    },
+    {
+      "field_name": "ip_rating",
+      "value": "IP67",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "IP protection class.....................................................: IP 67"
+    },
+    {
+      "field_name": "output_frequency",
+      "value": "50Hz",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Rated grid\nfrequency\n50Hz"
+    },
+    {
+      "field_name": "ac_output_voltage",
+      "value": "230V",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Rated grid\nvoltage\n230V"
+    },
+    {
+      "field_name": "power_factor",
+      "value": "\uff1e0.99",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Power factor \uff1e0.99"
+    },
+    {
+      "field_name": "rated_power",
+      "value": "300W to 2000W",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Rated output\npower\n300W 500W 600W 800W 1000W\n1300W 1600W 1800W 2000W"
+    }
+  ]
+}
