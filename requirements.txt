@@ -5,3 +5,4 @@ anthropic
 jinja2
 python-dotenv
 google-genai
+pytest
