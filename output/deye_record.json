@@ -1,0 +1,44 @@
+{
+  "doc_type": "Certificate of Conformity",
+  "model_series": "SUN-3K-G06P3-EU-AM2, SUN-4K-G06P3-EU-AM2, SUN-5K-G06P3-EU-AM2, SUN-6K-G06P3-EU-AM2, SUN-7K-G06P3-EU-AM2, SUN-8K-G06P3-EU-AM2, SUN-9K-G06P3-EU-AM2, SUN-10K-G06P3-EU-AM2, SUN-12K-G06P3-EU-AM2, SUN-15K-G06P3-EU-AM2, SUN-3K-G06P3-EU-AM2-P1, SUN-4K-G06P3-EU-AM2-P1, SUN-5K-G06P3-EU-AM2-P1, SUN-6K-G06P3-EU-AM2-P1, SUN-7K-G06P3-EU-AM2-P1, SUN-8K-G06P3-EU-AM2-P1, SUN-9K-G06P3-EU-AM2-P1, SUN-10K-G06P3-EU-AM2-P1, SUN-12K-G06P3-EU-AM2-P1, SUN-15K-G06P3-EU-AM2-P1",
+  "phase": "three",
+  "voltage_class": "1100V",
+  "facts": [
+    {
+      "field_name": "standards",
+      "value": "IEC 62116:2014 and IEC 61727:2004",
+      "source": "188_1115.pdf",
+      "quote": "Test Standard : IEC 62116:2014 and IEC 61727:2004"
+    },
+    {
+      "field_name": "ip_rating",
+      "value": "IP65",
+      "source": "188_1115.pdf",
+      "quote": "Protection degree IP65"
+    },
+    {
+      "field_name": "output_frequency",
+      "value": "50/60 Hz",
+      "source": "188_1115.pdf",
+      "quote": "Nominal grid frequency (Hz) 50/60"
+    },
+    {
+      "field_name": "ac_output_voltage",
+      "value": "230/400V",
+      "source": "188_1115.pdf",
+      "quote": "Nominal grid voltage (V) 3L/N/PE 230/400V"
+    },
+    {
+      "field_name": "power_factor",
+      "value": "0.8 leading~0.8 lagging",
+      "source": "188_1115.pdf",
+      "quote": "Output power factor 0.8 leading~0.8 lagging"
+    },
+    {
+      "field_name": "rated_power",
+      "value": "3kW, 4kW, 5kW, 6kW, 7kW, 8kW, 9kW, 10kW, 12kW, 15kW",
+      "source": "188_1115.pdf",
+      "quote": "Rated AC power (kW) 3 4 5 6\nRated AC power(kW) 7 8 9 10\nRated AC power(kW) 12 15"
+    }
+  ]
+}

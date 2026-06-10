@@ -14,22 +14,21 @@ from pydantic import BaseModel, Field
 
 class Fact(BaseModel):
     """One extracted piece of information, with provenance attached."""
-    value: str | None = Field(
-        default=None,
+    field_name: str = Field(
         description=(
-            "The extracted value, or None if the document does not "
-            "state it."
+            "What this fact is about, e.g. 'ip_rating', 'standards'."
         ),
     )
+    value: str | None = Field(
+        default=None,
+        description="The extracted value, or None if not stated.",
+    )
     source: str = Field(
-        description="Which document this came from (e.g. the file name).",
+        description="Which document this came from.",
     )
     quote: str | None = Field(
         default=None,
-        description=(
-            "Exact supporting text from the document. None if value "
-            "is None."
-        ),
+        description="Exact supporting text. None if value is None.",
     )
 
 
@@ -63,11 +62,11 @@ class DocRecord(BaseModel):
         ),
     )
 
-    # --- All other extracted facts, keyed by field name ---
-    facts: dict[str, Fact] = Field(
-        default_factory=dict,
+    # --- All other extracted facts, as a flat list ---
+    facts: list[Fact] = Field(
+        default_factory=list,
         description=(
-            "Other extracted facts (ratings, standards, label "
-            "fields), each a Fact with its own source and quote."
+            "List of extracted facts, each with field_name, value, "
+            "source, quote."
         ),
     )
