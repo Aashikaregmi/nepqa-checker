@@ -1,0 +1,39 @@
+{
+  "section": "NEPQA-2025 §1.4 — PV / Grid-Connected Inverter",
+  "note": "Hand-encoded from NEPQA-2025 Section 1.4. Reference rubric only, not source data. Requirements are paraphrased; consult the original for exact wording.",
+  "required_documents": [
+    { "id": "DOC-1", "requirement": "Test certificate to IEC 61727:2004 (utility interface characteristics), from an IECEE/IECRE-listed body" },
+    { "id": "DOC-2", "requirement": "Test certificate to IEC 62116:2014 (islanding prevention test procedure), from an IECEE/IECRE-listed body" },
+    { "id": "DOC-3", "requirement": "Test certificate to IEC 62891:2020 (MPPT efficiency of grid-connected inverters), from an IECEE/IECRE-listed body" },
+    { "id": "DOC-4", "requirement": "Test certificate to IEC 62109-1:2010 AND IEC 62109-2:2011 (safety: general + inverter-particular), from an IECEE/IECRE-listed body" },
+    { "id": "DOC-5", "requirement": "Importer-manufacturer agreement, signed and stamped, stating the PV inverter warranty period" },
+    { "id": "DOC-6", "requirement": "Catalogue and technical datasheet of the PV inverter" }
+  ],
+  "technical_requirements": [
+    { "id": "TECH-1", "requirement": "Rated AC output voltage: 3-phase 400V (L-L) ±10%, or 1-phase 230V (L-N) ±10%" },
+    { "id": "TECH-2", "requirement": "Output frequency 50Hz ± 2.5%" },
+    { "id": "TECH-3", "requirement": "MPPT input efficiency ≥ 95%" },
+    { "id": "TECH-4", "requirement": "Inverter efficiency ≥ 95% (≤5kVA) / ≥ 97% (>5kVA), transformerless" },
+    { "id": "TECH-5", "requirement": "Euro efficiency ≥ 94% (≤5kVA) / ≥ 96% (>5kVA), transformerless; efficiency-vs-output curve provided" },
+    { "id": "TECH-6", "requirement": "Inverter efficiency ≥ 90% for transformer topology" },
+    { "id": "TECH-7", "requirement": "No-load loss < 0.5% of rated power (transformerless)" },
+    { "id": "TECH-8", "requirement": "No-load loss < 1.5% of rated power (transformer topology)" },
+    { "id": "TECH-9", "requirement": "Total harmonic distortion (THD) < 5% at full load" },
+    { "id": "TECH-10", "requirement": "Power factor > 0.99 at nominal power; adjustable 0.8 leading to 0.8 lagging" },
+    { "id": "TECH-11", "requirement": "Ingress protection ≥ IP65 per IEC 60529" },
+    { "id": "TECH-12", "requirement": "Built-in meter and data logger with external user interface" },
+    { "id": "TECH-13", "requirement": "Internal protection: DC reverse polarity, grid fault, lightning on feeder" },
+    { "id": "TECH-14", "requirement": "Fully automatic operation (wake-up, synchronization, shutdown)" },
+    { "id": "TECH-15", "requirement": "Cooling: fan or heat sink to avoid excessive heating" },
+    { "id": "TECH-16", "requirement": "PV inverter warranty ≥ 5 years" }
+  ],
+  "label_fields": [
+    { "id": "LBL-1", "requirement": "Name of the manufacturer" },
+    { "id": "LBL-2", "requirement": "Brand, Model and Type" },
+    { "id": "LBL-3", "requirement": "Rated Power in Watt or VA" },
+    { "id": "LBL-4", "requirement": "Input and output voltage (V) and frequency (Hz)" },
+    { "id": "LBL-5", "requirement": "Maximum Input Voltage" },
+    { "id": "LBL-6", "requirement": "MPPT Voltage Range" },
+    { "id": "LBL-7", "requirement": "Serial Number" }
+  ]
+}
