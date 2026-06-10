@@ -5,4 +5,7 @@ anthropic
 jinja2
 python-dotenv
 google-genai
+jsonref
 pytest
+streamlit
+fpdf2
