@@ -4,3 +4,4 @@ __pycache__/
 sources/*.pdf
 .venv/
 venv/
+.pytest_cache/

@@ -109,3 +109,29 @@ def generate(deye: DocRecord, chisage: DocRecord,
                  "ASK_FACTORY = cannot be shown by this document type.*")
 
     return "\n".join(lines)
+
+
+def draft_to_pdf(draft_text: str) -> bytes:
+    """Convert the draft markdown text into a simple PDF (bytes)."""
+    from fpdf import FPDF
+    from fpdf.enums import XPos, YPos
+
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Helvetica", size=11)
+    for line in draft_text.split("\n"):
+        stripped = line.strip()
+        # skip pure markdown separators (table rule and horizontal rule)
+        if set(stripped) <= {"-", "|", " "} and "-" in stripped:
+            continue
+        # strip markdown markers for clean plain-text output
+        clean = stripped.replace("#", "").replace("**", "").replace("*", "")
+        clean = clean.replace("|", " ").replace("—", "-").strip()
+        # core Helvetica is latin-1 only; drop anything it can't encode
+        clean = clean.encode("latin-1", "replace").decode("latin-1")
+        if clean == "":
+            pdf.ln(4)
+        else:
+            pdf.multi_cell(0, 6, clean,
+                           new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    return bytes(pdf.output())
