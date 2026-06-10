@@ -38,6 +38,8 @@ Three stages:
   of inventing conflicts.
 - **Score & generate** — pure Python. Scores each record against the checklist
   and writes the draft.
+- **Streamlit UI** — `app.py` is a thin web wrapper around the same functions;
+  it adds no new logic.
 
 Every fact keeps its source and quote because the Pydantic schema requires it —
 that's what keeps the pipeline honest end to end.
@@ -71,10 +73,15 @@ pip install -r requirements.txt
 python3 run_extract.py sources/<file>.pdf   # one PDF -> output/<name>_record.json
 python3 run_generate.py                      # builds output/draft.md
 python3 -m pytest tests/                      # runs the reconcile tests
+
+streamlit run app.py                          # web UI
 ```
 
 The extracted records are committed, so `run_generate.py` and the tests work
 without any API calls.
+
+The web UI lets you upload PDFs, run the pipeline (live or using saved
+records), view the draft, and download it as `.md` or `.pdf`.
 
 ## Things I deliberately left out
 
@@ -91,3 +98,7 @@ without any API calls.
   updated by hand if NEPQA changes.
 - A free-tier model reads the PDFs, so the extracted records are committed to
   let the later stages run without API calls.
+- The PDF export strips markdown formatting bluntly (removes `#`, `*`, and
+  dash-only lines), so it is plain text, not styled.
+- The UI has a checkbox to reuse saved records so testing does not spend API
+  quota.
