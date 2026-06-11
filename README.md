@@ -37,7 +37,12 @@ Three stages:
   product (shared model, same phase); if not, marks them not comparable instead
   of inventing conflicts.
 - **Score & generate** — pure Python. Scores each record against the checklist
-  and writes the draft.
+  and writes the draft. The draft has a document scorecard, a technical
+  scorecard (the few TECH items a fact can verify; the rest are NOT_STATED), a
+  labeling pre-fill (informational — no artwork is provided), and a
+  manufacturer / test-information section, plus the "clarify with the factory"
+  list. Product labels are derived from each record, so upload order is
+  irrelevant.
 - **Streamlit UI** — `app.py` is a thin web wrapper around the same functions;
   it adds no new logic.
 
@@ -51,9 +56,11 @@ src/
   schema.py       Pydantic models: Fact (value + source + quote), DocRecord
   extract.py      stage 1 — PDF -> DocRecord (the only LLM step)
   reconcile.py    stage 2 — two DocRecords -> same/different + fact comparison
-  generate.py     stage 3 — score vs checklist -> Markdown draft
+  generate.py     stage 3 — document + technical scorecards, labeling
+                  pre-fill, manufacturer/test info -> Markdown draft
 data/
-  nepqa_checklist.json   NEPQA §1.4 requirements, hand-encoded
+  nepqa_checklist.json   NEPQA §1.4 requirements (documents, technical,
+                         label fields), hand-encoded
 sources/          input PDFs (gitignored)
 output/           extracted records + draft.md
 tests/            reconcile tests
@@ -102,3 +109,6 @@ records), view the draft, and download it as `.md` or `.pdf`.
   dash-only lines), so it is plain text, not styled.
 - The UI has a checkbox to reuse saved records so testing does not spend API
   quota.
+- `read_pdf_text` caps extraction at `max_pages=12`. That keeps big combined
+  PDFs cheap to read, but a long document with relevant facts past page 12
+  would have them missed — a known risk for large combined filings.

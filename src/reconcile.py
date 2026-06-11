@@ -8,6 +8,18 @@ then either compares their facts or marks everything out-of-scope.
 from .schema import DocRecord
 
 
+def _normalize(value: str | None) -> str:
+    """Lowercase, drop all whitespace, and unify full-width punctuation,
+    so '50Hz' vs '50 Hz' or 'IP65' vs 'IP 65' are not false conflicts."""
+    if not value:
+        return ""
+    text = value.lower()
+    for full, ascii_ in (("＞", ">"), ("＜", "<"), ("％", "%"),
+                         ("～", "~"), ("：", ":")):
+        text = text.replace(full, ascii_)
+    return "".join(text.split())
+
+
 def _models(record: DocRecord) -> set[str]:
     """Split the model_series string into a set of individual model names."""
     if not record.model_series:
@@ -54,9 +66,7 @@ def reconcile(a: DocRecord, b: DocRecord) -> dict:
     for field in all_fields:
         fa, fb = facts_a.get(field), facts_b.get(field)
         if fa and fb:
-            va = (fa.value or "").strip().lower()
-            vb = (fb.value or "").strip().lower()
-            if va == vb:
+            if _normalize(fa.value) == _normalize(fb.value):
                 status = "CONFIRMED"
             else:
                 status = "CONFLICT"

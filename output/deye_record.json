@@ -38,7 +38,37 @@
       "field_name": "rated_power",
       "value": "3kW, 4kW, 5kW, 6kW, 7kW, 8kW, 9kW, 10kW, 12kW, 15kW",
       "source": "188_1115.pdf",
-      "quote": "Rated AC power (kW) 3 4 5 6\nRated AC power(kW) 7 8 9 10\nRated AC power(kW) 12 15"
+      "quote": "Rated AC power(kW) 3 4 5 6\nRated AC power(kW) 7 8 9 10\nRated AC power(kW) 12 15"
+    },
+    {
+      "field_name": "manufacturer_name",
+      "value": "NingBo Deye Inverter Technology Co., Ltd.",
+      "source": "188_1115.pdf",
+      "quote": "Certificate Holder : NingBo Deye Inverter Technology Co., Ltd."
+    },
+    {
+      "field_name": "manufacturer_address",
+      "value": "No. 26 South YongJiang Road, Daqi, Beilun, NingBo, China",
+      "source": "188_1115.pdf",
+      "quote": "No. 26 South YongJiang Road, Daqi, Beilun, NingBo, China"
+    },
+    {
+      "field_name": "certificate_or_report_number",
+      "value": "PCS-24-1022",
+      "source": "188_1115.pdf",
+      "quote": "Certificate Number : PCS-24-1022"
+    },
+    {
+      "field_name": "issue_date",
+      "value": "2024-03-26",
+      "source": "188_1115.pdf",
+      "quote": "Date of Original Issue : 2024-03-26"
+    },
+    {
+      "field_name": "test_lab",
+      "value": "SGS-CSTC Standards Technical Services Co., Ltd. Guangzhou Branch",
+      "source": "188_1115.pdf",
+      "quote": "Test Laboratory : SGS-CSTC Standards Technical Services Co., Ltd. Guangzhou Branch"
     }
   ]
 }

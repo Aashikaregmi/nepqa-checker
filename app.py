@@ -19,7 +19,8 @@ checklist = json.load(open("data/nepqa_checklist.json"))
 
 use_saved = st.checkbox(
     "Use already-saved records (no API calls)", value=True,
-    help="Leave on to reuse output/*.json. Turn off to extract live (uses Gemini quota).",
+    help="Leave on to reuse output/*.json. Turn off to extract live "
+         "(uses Gemini quota).",
 )
 
 uploaded = st.file_uploader(
@@ -36,10 +37,12 @@ if st.button("Run pipeline"):
             records.append(DocRecord(**json.load(open(path))))
     else:
         if not uploaded:
-            st.error("Upload at least one PDF, or tick 'Use already-saved records'.")
+            st.error("Upload at least one PDF, or tick "
+                     "'Use already-saved records'.")
             st.stop()
         for f in uploaded:
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+            with tempfile.NamedTemporaryFile(
+                    delete=False, suffix=".pdf") as tmp:
                 tmp.write(f.getbuffer())
                 tmp_path = tmp.name
             st.write(f"Extracting {f.name} ...")
@@ -53,10 +56,11 @@ if st.button("Run pipeline"):
         with st.expander(f"Extracted: {r.doc_type} ({r.phase}-phase)"):
             st.json(r.model_dump())
 
-    # reconcile + generate (assumes first two records)
-    deye, chisage = records[0], records[1]
-    result = reconcile(deye, chisage)
-    draft = generate(deye, chisage, result, checklist)
+    # reconcile + generate. We do not assume which record is which —
+    # generate() derives each product's label from the record itself.
+    record_a, record_b = records[0], records[1]
+    result = reconcile(record_a, record_b)
+    draft = generate(record_a, record_b, result, checklist)
 
     st.subheader("Draft")
     st.markdown(draft)

@@ -1,8 +1,6 @@
 pydantic
 pdfplumber
 instructor
-anthropic
-jinja2
 python-dotenv
 google-genai
 jsonref

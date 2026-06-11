@@ -1,6 +1,6 @@
 {
   "doc_type": "Test Report",
-  "model_series": "CE-1P3001G-230-EU, CE-1P5001G-230-EU, CE-1P6001G-230-EU, CE-1P8001G-230-EU, CE-1P10001G-230-EU, CE-1P13001G-230-EU, CE-1P16001G-230-EU, CE-1P18001G-230-EU, CE-1P20001G-230-EU",
+  "model_series": "CE-1P3001G-230-EU, CE-1P5001G-230-EU, CE-1P6001G-230-EU, CE-1P8001G-230-EU, CE-1P10001G-230-EU, CE-1P13001G-230-EU, CE-1P16001G-230-EU, CE-1P18001G-230-EU, CE-1P20001G-230-EU(1)",
   "phase": "single",
   "voltage_class": "60V",
   "facts": [
@@ -39,6 +39,36 @@
       "value": "300W to 2000W",
       "source": "DSS_GZES230100125901_combined-1.pdf",
       "quote": "Rated output\npower\n300W 500W 600W 800W 1000W\n1300W 1600W 1800W 2000W"
+    },
+    {
+      "field_name": "manufacturer_name",
+      "value": "Zhejiang CHISAGE New Energy Technology Co., Ltd",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Manufacturer.....................................: Zhejiang CHISAGE New Energy Technology Co., Ltd"
+    },
+    {
+      "field_name": "manufacturer_address",
+      "value": "No. 1828 Fuqing South RD. Panhuo ST. Yinzhou District Ningbo\nZhejiang 315000 China",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Address...........................................: No. 1828 Fuqing South RD. Panhuo ST. Yinzhou District Ningbo\nZhejiang 315000 China"
+    },
+    {
+      "field_name": "certificate_or_report_number",
+      "value": "GZES230100125901",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Report Number...............................: GZES230100125901"
+    },
+    {
+      "field_name": "issue_date",
+      "value": "2023-02-01",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Date of issue...................................: 2023-02-01"
+    },
+    {
+      "field_name": "test_lab",
+      "value": "SGS-CSTC Standards Technical Services Co., Ltd. Guangzhou Branch",
+      "source": "DSS_GZES230100125901_combined-1.pdf",
+      "quote": "Name of Testing Laboratory SGS-CSTC Standards Technical Services Co., Ltd. Guangzhou\npreparing the Report......................: Branch"
     }
   ]
 }

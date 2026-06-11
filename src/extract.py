@@ -16,9 +16,18 @@ from .schema import DocRecord
 
 load_dotenv()
 
-client = instructor.from_genai(
-    genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-)
+_client = None
+
+
+def _get_client():
+    """Build the Gemini client lazily, so importing this module never
+    requires GEMINI_API_KEY (only calling extract() does)."""
+    global _client
+    if _client is None:
+        _client = instructor.from_genai(
+            genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+        )
+    return _client
 
 
 def read_pdf_text(pdf_path: str, max_pages: int | None = None) -> str:
@@ -51,7 +60,15 @@ def extract(pdf_path: str) -> DocRecord:
         "- Also return a 'facts' list. Add one entry for each of these "
         "that the document states (skip ones not stated):\n"
         "    standards, ip_rating, output_frequency, ac_output_voltage,\n"
-        "    power_factor, rated_power, warranty.\n"
+        "    power_factor, rated_power, warranty,\n"
+        "    manufacturer_name, manufacturer_address,\n"
+        "    certificate_or_report_number, issue_date, test_lab.\n"
+        "- manufacturer_name / manufacturer_address: the company that "
+        "makes the product and its address.\n"
+        "- certificate_or_report_number: the document's own "
+        "certificate or report number.\n"
+        "- issue_date: the date the document was issued.\n"
+        "- test_lab: the issuing body / testing laboratory.\n"
         "- Each fact entry has: field_name (one of the names above), "
         "value, source, and quote (exact text from the document).\n"
         "- Example fact entry:\n"
@@ -61,7 +78,7 @@ def extract(pdf_path: str) -> DocRecord:
         f"DOCUMENT TEXT:\n{document_text}"
     )
 
-    record = client.messages.create(
+    record = _get_client().messages.create(
         model="gemini-2.5-flash-lite",
         messages=[{"role": "user", "content": prompt}],
         response_model=DocRecord,
