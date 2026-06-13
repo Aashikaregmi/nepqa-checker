@@ -7,3 +7,7 @@ jsonref
 pytest
 streamlit
 fpdf2
+
+langgraph
+langchain-core
+langchain-groq
