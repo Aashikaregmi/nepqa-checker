@@ -90,11 +90,72 @@ without any API calls.
 The web UI lets you upload PDFs, run the pipeline (live or using saved
 records), view the draft, and download it as `.md` or `.pdf`.
 
+## Agentic Extraction (optional, alongside the original pipeline)
+
+There is also an **agentic** version of the extraction stage, built as a
+[LangGraph](https://langchain-ai.github.io/langgraph/) and powered by Groq
+(free tier). It sits next to the original `extract.py` rather than replacing it
+— `app.py` and the Gemini path are untouched.
+
+**What "agentic" changes.** In the original pipeline the LLM reads the PDF in a
+single step and fills the schema. In the agentic version the LLM *drives* the
+extraction: it is given tools, decides which to call, and a verifier loops it
+back to correct itself.
+
+- **`search_document`** — the agent searches the PDF text for exact wording (an
+  IEC number, "phase", a model code) before quoting it.
+- **`submit_extraction`** — the agent declares it is done, returning a record.
+  Its argument type **is my real `DocRecord`** (from `src/schema.py`), so the
+  agent is forced to produce exactly the shape `reconcile`/`generate` already
+  understand.
+- a deterministic **verify** node then checks every quote is a *verbatim*
+  substring of the source; if any quote is fabricated or wrong, the agent is
+  looped back with the list of failures and tries again (bounded by
+  `MAX_ATTEMPTS = 3`).
+
+**The principle I deliberately kept:** the agent does the **investigation**, but
+the pass/fail **verdict stays in deterministic Python**. The `finalize` node
+calls my **real `generate` scoring** (`score_documents` / `score_technical` via
+the same block builders the original draft uses), so the judgement is identical
+and auditable. A model can fabricate a quote, but it cannot fabricate the
+document that contains it — which is why the verifier is plain Python, not the
+model checking itself. Agentic for the gathering, deterministic for the verdict.
+
+```bash
+pip install -r requirements.txt
+
+# one-time: free key from https://console.groq.com/keys
+echo "GROQ_API_KEY=gsk_..." >> .env
+
+python3 run_agent.py sources/<file>.pdf   # PDF -> agentic extraction -> output/draft.md
+
+# see the agentic loop WITHOUT spending an API call (fake model forces a retry):
+python3 test_wiring.py
+```
+
+To keep the cross-document comparison, run the agent on both PDFs and hand the
+two records to the existing `reconcile` + `generate` — the agent only replaces
+*extraction*; reconcile and scoring stay exactly as they were (see the commented
+section at the bottom of `run_agent.py`).
+
+Files: `src/agent.py` (the graph), `run_agent.py` (entry point), `test_wiring.py`
+(proves the loop with a fake model).
+
+
+Main challenges:
+
+1. Tool-call format — `llama-3.3-70b` returned malformed tool calls (Groq 400);
+   switched to `gpt-oss-20b`.
+2. Convergence — the agent looped or never submitted; fixed by forcing
+   `submit_extraction`, plus `reasoning_effort="low"` so the forced call isn't
+   starved of output tokens.
+3. Free-tier limits / messy PDFs — 8000 tokens/min and odd Unicode broke runs;
+   fixed by not re-sending the document each turn, per-binding `max_tokens`,
+   retries/backoff, and NFKC normalization.
+
 ## Things I deliberately left out
 
 - **No database** — files in, file out. Nothing to store between runs.
-- **No orchestration library** (LangGraph etc.) — the pipeline is a straight
-  three-step line. A verifier step is where one would actually fit later.
 - **No FastAPI** — this is one self-contained tool, not a service.
 
 ## What could be better
